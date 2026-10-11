@@ -1,0 +1,20 @@
+{
+  "name": "ai-chatbot-platform",
+  "version": "1.0.0",
+  "description": "An OpenAI-style AI chatbot web app built with the OpenAI Responses API, Express (local) and Vercel serverless functions.",
+  "type": "module",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node --watch server.js"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "dependencies": {
+    "dotenv": "^16.4.5",
+    "express": "^4.21.0",
+    "openai": "^5.0.0"
+  },
+  "license": "MIT"
+}
