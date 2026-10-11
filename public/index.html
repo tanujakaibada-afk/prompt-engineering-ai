@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Your AI Assistant - an AI chatbot powered by the OpenAI API." />
+  <title>Bodha AI </title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="app">
+
+    <!-- Sidebar -->
+    <aside class="sidebar" id="sidebar">
+      <div class="brand">
+        <span class="brand-logo">✦</span>
+        <span class="brand-name"></span>
+      </div>
+
+      <button class="btn-primary" id="newChatBtn">＋ New Chat</button>
+
+      <div class="history-label">Recent chats</div>
+      <ul class="history" id="historyList"></ul>
+
+      <div class="sidebar-footer">
+        <button class="btn-ghost" id="deleteAllBtn">Delete all chats</button>
+        <p class="footnote">Chats are stored only in this browser.</p>
+      </div>
+    </aside>
+    <div class="overlay" id="overlay"></div>
+
+    <!-- Main area -->
+    <main class="main">
+      <header class="topbar">
+        <button class="icon-btn menu-btn" id="menuBtn" aria-label="Open menu">☰</button>
+        <h2 class="chat-title" id="chatTitle">New chat</h2>
+        <button class="btn-ghost" id="clearChatBtn">Clear chat</button>
+      </header>
+
+      <section class="chat" id="chat" aria-live="polite">
+        <!-- Welcome page -->
+        <div class="welcome" id="welcome">
+          <div class="welcome-glow"></div>
+          <div class="welcome-logo">✦</div>
+          <h1>Your AI Assistant</h1>
+          <p>Ask me anything — learn, write, code or brainstorm. Pick a prompt below or type your own.</p>
+          <div class="prompt-grid">
+            <button class="prompt-card" data-prompt="Explain Artificial Intelligence">
+              <span class="prompt-icon">🧠</span>
+              <span>Explain Artificial Intelligence</span>
+            </button>
+            <button class="prompt-card" data-prompt="Help me learn Python">
+              <span class="prompt-icon">🐍</span>
+              <span>Help me learn Python</span>
+            </button>
+            <button class="prompt-card" data-prompt="Write a project report">
+              <span class="prompt-icon">📝</span>
+              <span>Write a project report</span>
+            </button>
+            <button class="prompt-card" data-prompt="Improve my English">
+              <span class="prompt-icon">💬</span>
+              <span>Improve my English</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Messages -->
+        <div class="messages" id="messages"></div>
+      </section>
+
+      <footer class="composer">
+        <div class="composer-box">
+          <textarea id="input" rows="1" maxlength="4000" placeholder="Message your AI assistant…"></textarea>
+          <button class="send-btn" id="sendBtn" aria-label="Send message">➤</button>
+        </div>
+        <p class="hint">Enter to send · Shift + Enter for a new line · AI can make mistakes.</p>
+      </footer>
+    </main>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
