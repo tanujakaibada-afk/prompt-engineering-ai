@@ -1,31 +1,23 @@
-// server.js
-// Local development server (Express). Run with: npm run dev
-// It serves the files in /public and exposes the same /api/chat endpoint that
-// Vercel provides in production. (Vercel does NOT use this file.)
-
-import 'dotenv/config';
 import express from 'express';
-import path from 'path';
-import { fileURLToPath } from 'url';
-import chatHandler from './api/chat.js';
+import dotenv from 'dotenv';
+dotenv.config();
 
-const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const app = express();
-const PORT = process.env.PORT || 3000;
+app.use(express.json());
+app.use(express.static('public'));
 
-app.use(express.json({ limit: '100kb' }));
-app.use(express.static(path.join(__dirname, 'public')));
+app.post('/api/chat', async (req, res) => {
+  const apiKey = process.env.GEMINI_API_KEY;
+  const userMessage = req.body.message;
 
-app.all('/api/chat', chatHandler);
-
-// Return friendly JSON for bad requests (e.g. invalid JSON body)
-app.use((err, req, res, next) => {
-  res.status(400).json({ error: 'Invalid request.' });
+  const r = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${apiKey}`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ contents: [{ parts: [{ text: userMessage }] }] })
+  });
+  const data = await r.json();
+  const reply = data.candidates?.[0]?.content?.parts?.[0]?.text;
+  res.json({ reply });
 });
 
-app.listen(PORT, () => {
-  console.log(`✅ Server running at http://localhost:${PORT}`);
-  if (!process.env.OPENAI_API_KEY) {
-    console.log('⚠️  OPENAI_API_KEY is not set. Copy .env.example to .env and add your key.');
-  }
-});
+app.listen(3000, () => console.log('running'));
